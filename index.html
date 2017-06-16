@@ -9,8 +9,12 @@
 <body>
 <svg width="900" height="500" id="svgs1"></svg>
 <hr>
-<div class="list1"></div>
-<div class="lists"></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
 <input type="button" value="新增" onclick="update()">
 <script>
 d3.json("invoice-taipei.json", function(data) {
@@ -47,12 +51,12 @@ d3.json("invoice-taipei.json", function(data) {
     render2();
 	
     function bind(data){
-        var selection = d3.select("body").selectAll(".list1").data(data);
+        var selection = d3.select("body").selectAll("div").data(data);
         selection.enter().append("div");
         selection.exit().remove();
     }
     function render(){
-        d3.selectAll("list1>div").text(function(d,i){
+        d3.selectAll("div").text(function(d,i){
             return (i+1)+':'+d;
         }).style({
             color:function(d){
@@ -117,11 +121,11 @@ d3.json("invoice-taipei.json", function(data) {
 	render4();
 	function bind4(data){
         var selection = d3.select("body").selectAll(".lists").data(data);
-        selection.enter().append("div");
+        selection.enter().append("p");
         selection.exit().remove();
     }
     function render4(){
-        d3.selectAll(".lists>div").text(function(d,i){
+        d3.selectAll("p").text(function(d,i){
             return (i+1)+':'+d;
         }).style({
             color:function(d){             
