@@ -31,7 +31,7 @@ d3.json("invoice-taipei.json", function(data) {
 		}).text(f_data[i].industry);
 		bodys.append("rect").attr({
 			x: 250,
-			y: (20 * i) + 22,
+			y: (20 * i) + 30,
 			width: f_data[i].amount / 100000000,
 			height: 18,
 			fill: "red"
