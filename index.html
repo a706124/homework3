@@ -28,10 +28,11 @@ d3.json("invoice-taipei.json", function(data) {
 		bodys.append("text").attr({
 			x: 20,
 			y: (20 * i) + 35,
+			"font-size": "13px"
 		}).text(f_data[i].industry);
 		bodys.append("rect").attr({
 			x: 250,
-			y: (20 * i) + 30,
+			y: (20 * i) + 22,
 			width: f_data[i].amount / 100000000,
 			height: 18,
 			fill: "red"
