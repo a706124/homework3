@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>第三週作業</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<input type="button" value="新增" onclick="update()">
+<script>
+    var arr = [85, 60, 99, 49, 77, 82];
+	var w=900,h=500,p=100;
+    var padding=5;
+    var svg_width=40;
+    bind(arr);
+    render();
+ 	svg();
+    bind2(arr);
+    render2();
+	
+    function bind(data){
+        var selection = d3.select("body").selectAll("div").data(data);
+        selection.enter().append("div");
+        selection.exit().remove();
+    }
+    function render(){
+        d3.selectAll("div").text(function(d,i){
+            return (i+1)+':'+d;
+        }).style({
+            color:function(d){
+                if(d<70){return "red";}else{return "blank"}                
+            }
+        })
+    }
+	
+	function svg(){
+        d3.select("body").append("svg").attr({
+            width:w,
+            height:h,
+            id:"bar-chart",
+        })
+		d3.select("body").append("hr");
+    }
+    function bind2(arr){
+        var selection=d3.select("svg#bar-chart").selectAll("rect").data(arr);
+        selection.enter().append("rect");
+        selection.exit().remove();
+        
+        var selection=d3.select("svg#bar-chart").selectAll("text").data(arr);
+        selection.enter().append("text");
+        selection.exit().remove();
+    }
+    function render2(){
+        d3.selectAll("#bar-chart>rect").attr({
+            x:function(d,i){return p+(padding+svg_width)*i;},
+            y:function(d){return h-p-d;},
+            width:svg_width,
+            height:function(d){return d;},
+            fill:function(d){
+                if(d<70){return "red";}else{return "lightgreen"}                
+            }
+        });
+        d3.selectAll("#bar-chart>text").attr({
+            x:function(d,i){return p+(padding+svg_width)*i+12;},
+            y:function(d){return h-p+20;},
+        }).text(function(d){
+            return d;
+        });
+    }
+    function update(){
+        var num=rand(10,100);
+        arr.push(num);
+        bind2(arr)
+        render2();
+    }
+    function rand(n,m){
+        var rScale=d3.scale.linear().domain([0,1]).rangeRound([n,m]);
+        return rScale(Math.random());
+        //var reslut= Math.floor(Math.random()*(m-n+1)+n);
+        //return reslut;
+    }
+	
+	    index=["中國國民黨", "民主進步黨", "時代力量", "無黨團結聯聯盟", "親民黨"];
+    color=["blue", "green", "yellow", "gray", "orange"];
+    var xScale = d3.scale.ordinal()
+          .domain(index)
+          .range(color);
+
+    console.log(xScale("無黨團結聯聯盟"));
+</script>
+</body>
+</html>
