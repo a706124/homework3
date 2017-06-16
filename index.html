@@ -8,7 +8,7 @@
 
 <body>
 <svg width="900" height="500" id="svgs1"></svg>
-
+<hr>
 <div></div>
 <div></div>
 <div></div>
@@ -20,6 +20,7 @@
 <div></div>
 <div></div>
 <div></div>
+<p></p>
 <input type="button" value="新增" onclick="update()">
 <script>
 d3.json("invoice-taipei.json", function(data) {
@@ -117,13 +118,30 @@ d3.json("invoice-taipei.json", function(data) {
         //return reslut;
     }
 	
-	    index=["中國國民黨", "民主進步黨", "時代力量", "無黨團結聯聯盟", "親民黨"];
+	index=["中國國民黨", "民主進步黨", "時代力量", "無黨團結聯聯盟", "親民黨"];
     color=["blue", "green", "yellow", "gray", "orange"];
     var xScale = d3.scale.ordinal()
           .domain(index)
           .range(color);
-
-    console.log(xScale("無黨團結聯聯盟"));
+	bind4(index);
+	render4();
+	function bind4(data){
+        var selection = d3.select("body").selectAll("div").data(data);
+        selection.enter().append("div");
+        selection.exit().remove();
+    }
+    function render4(){
+        d3.selectAll("div").text(function(d,i){
+            return (i+1)+':'+d;
+        }).style({
+            color:function(d){             
+                 return xScale(d);     
+          }  
+        })
+    }
+	
+	d3.select("body").append("hr");
+		
 </script>
 </body>
 </html>
