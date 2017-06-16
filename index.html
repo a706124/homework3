@@ -8,6 +8,13 @@
 </head>
 
 <body>
+    <style>
+        div{
+            font-size: 7px;
+        }
+    </style>
+<svg width="900" height="500" id="svgs1"></svg>
+
 <div></div>
 <div></div>
 <div></div>
@@ -21,6 +28,30 @@
 <div></div>
 <input type="button" value="新增" onclick="update()">
 <script>
+d3.json("invoice-taipei.json", function(data) {
+	alert("A");
+	var bodys = d3.select("#svgs1");
+
+	var f_data = data.filter(function(d) {
+		return d.amount > 1000000000 && d.cid == "A" && d.date.substr(0, 6) == "2016/8";
+	});
+
+	for (var i = 0; i < f_data.length; i++) {
+		bodys.append("text").attr({
+			x: 20,
+			y: (20 * i) + 35,
+			"font-size": "13px"
+		}).text(f_data[i].industry);
+		bodys.append("rect").attr({
+			x: 250,
+			y: (20 * i) + 22,
+			width: f_data[i].amount / 100000000,
+			height: 18,
+			fill: "red"
+		});
+	}
+});
+
     var arr = [85, 60, 99, 49, 77, 82];
 	var w=900,h=500,p=100;
     var padding=5;
