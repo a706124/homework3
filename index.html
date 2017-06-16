@@ -3,16 +3,10 @@
 <head>
 <meta charset="utf-8">
 <title>第三週作業</title>
-<link rel="stylesheet" type="text/css" href="style.css">
 <script src="https://d3js.org/d3.v3.min.js"></script>
 </head>
 
 <body>
-    <style>
-        div{
-            font-size: 7px;
-        }
-    </style>
 <svg width="900" height="500" id="svgs1"></svg>
 
 <div></div>
@@ -29,7 +23,6 @@
 <input type="button" value="新增" onclick="update()">
 <script>
 d3.json("invoice-taipei.json", function(data) {
-	alert("A");
 	var bodys = d3.select("#svgs1");
 
 	var f_data = data.filter(function(d) {
